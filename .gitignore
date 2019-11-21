@@ -1,0 +1,14 @@
+\.idea/
+${dir.cachedcontent}/
+\.idea/
+\.classpath
+\.project
+\.settings/
+target/
+bin/
+**/*.iml
+
+# Mac
+.DS_Store
+
+contentstore/
