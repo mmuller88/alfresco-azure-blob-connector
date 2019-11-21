@@ -18,6 +18,8 @@ skip_image_build(){
 
 down(){
   docker-compose down
+  ./delete-storage-container.sh ${AZURE_DELETED_CONTAINER_NAME}
+  ./delete-storage-container.sh ${AZURE_CONTAINER_NAME}
   exit 0
 }
 

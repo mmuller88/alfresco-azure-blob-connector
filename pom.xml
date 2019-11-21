@@ -16,7 +16,7 @@
     <properties>
         <image.registry>quay.io</image.registry>
         <image.name>alfresco/content-repository-azure</image.name>
-        <acs.version>6.2.0-A8</acs.version>
+        <acs.version>6.1.0</acs.version>
         <dependency.alfresco-azure-connector.version>1.0</dependency.alfresco-azure-connector.version>
 
         <fabric8.maven.version>3.5.37</fabric8.maven.version>
