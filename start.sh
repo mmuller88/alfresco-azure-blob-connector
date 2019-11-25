@@ -135,7 +135,7 @@ then
   t0=`date +%s`
 
   echo "Waiting for alfresco to start"
-  until $(curl --output /dev/null --silent --head --fail http://localhost:8080/alfresco) || [ "$COUNTER" -eq "$TIMEOUT" ]; do
+  until $(curl --output /dev/null --silent --head --fail http://localhost:8082/alfresco) || [ "$COUNTER" -eq "$TIMEOUT" ]; do
     printf '.'
     sleep $WAIT_INTERVAL
     COUNTER=$(($COUNTER+$WAIT_INTERVAL))
