@@ -136,7 +136,7 @@ then
   t0=`date +%s`
 
   echo "Waiting for alfresco to start"
-  until $(curl --output /dev/null --silent --head --fail http://localhost:8082/alfresco) || [ "$COUNTER" -eq "$TIMEOUT" ]; do
+  until $(curl --output /dev/null --silent --head --fail http://localhost:8080/alfresco) || [ "$COUNTER" -eq "$TIMEOUT" ]; do
     printf '.'
     sleep $WAIT_INTERVAL
     COUNTER=$(($COUNTER+$WAIT_INTERVAL))
@@ -146,6 +146,7 @@ then
     t1=`date +%s`
     delta=$((($t1 - $t0)/60))
     echo "Alfresco Started in $delta minutes"
+    sleep 10
   else
     echo "Waited $COUNTER seconds"
     echo "Alfresco Could not start in time."
