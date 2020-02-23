@@ -62,7 +62,7 @@ services:
             - REPO_PORT=8080
     
     digital-workspace:
-        image: quay.io/alfresco/alfresco-digital-workspace:1.2.0
+        image: alfresco/alfresco-content-app:master
         environment:
             BASE_PATH: ./
         depends_on:

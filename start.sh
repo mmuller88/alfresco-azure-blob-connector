@@ -44,6 +44,12 @@ get_value_from_pom(){
   sed -ne "/$TAG/{s/.*<$TAG>\(.*\)<\/$TAG>.*/\1/p;q;}" $POM
 }
 
+error(){
+  echo "::error:: $1"
+  sleep 5
+  exit 1
+}
+
 use_quay_images(){
   echo "use_quay_images ..."
   SKIP_IMAGE_BUILD="true"
@@ -84,23 +90,19 @@ done
 # Fix container names if set
 if [ ! -n "${AZURE_CONTAINER_NAME}" ]
 then
-  echo "AZURE_CONTAINER_NAME missing"
-  exit 1
+  error "AZURE_CONTAINER_NAME missing"
 fi
 if [ ! -n "${AZURE_DELETED_CONTAINER_NAME}" ]
 then
-  echo "AZURE_DELETED_CONTAINER_NAME missing"
-  exit 1
+  error "AZURE_DELETED_CONTAINER_NAME missing"
 fi
 if [ ! -n "${AZURE_STORAGE_ACCOUNT_NAME}" ]
 then
-  echo "AZURE_STORAGE_ACCOUNT_NAME missing"
-  exit 1
+  error "AZURE_STORAGE_ACCOUNT_NAME missing"
 fi
 if [ ! -n "${AZURE_STORAGE_ACCOUNT_KEY}" ]
 then
-  echo "AZURE_STORAGE_ACCOUNT_KEY missing"
-  exit 1
+  error "AZURE_STORAGE_ACCOUNT_KEY missing"
 fi
 
 echo "AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME}"
@@ -123,8 +125,7 @@ if [ $? -eq 0 ]
 then
   echo "Docker Compose started ok"
 else
-  echo "Docker Compose failed to start" >&2
-  exit 1
+  error "Docker Compose failed to start" >&2
 fi
 
 if [[ $WAIT == "true" ]]
@@ -150,7 +151,6 @@ then
     echo "Alfresco Could not start in time."
     echo "START of Alfresco service logs for investigation"
     docker-compose logs --tail="all" alfresco
-    echo "END of Alfresco service logs for investigation"
-    exit 1
+    error "END of Alfresco service logs for investigation"
   fi
 fi
